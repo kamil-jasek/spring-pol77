@@ -8,6 +8,7 @@ public class OrderService {
     private final InvoiceService invoiceService;
     private final OrderRepository repository;
 
+//    @Autowired - not needed
     public OrderService(InvoiceService invoiceService, OrderRepository repository) {
         this.invoiceService = invoiceService;
         this.repository = repository;
