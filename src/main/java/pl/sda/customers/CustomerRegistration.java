@@ -21,7 +21,7 @@ public class CustomerRegistration {
     }
 
 //    @Autowired -- not recommended
-    public void setRepository(CustomerRepository repository) {
+//    public void setRepository(CustomerRepository repository) {
 //        this.repository = repository;
-    }
+//    }
 }
