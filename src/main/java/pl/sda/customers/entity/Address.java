@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 
 @Entity
 @Table(name = "addresses")
@@ -23,7 +24,10 @@ public final class Address {
     // only for hibernate
     private Address() {}
 
-    public Address(String street, String city, String zipCode, String countryCode) {
+    public Address(@NonNull String street,
+        @NonNull String city,
+        @NonNull String zipCode,
+        @NonNull String countryCode) {
         this.id = UUID.randomUUID();
         this.street = street;
         this.city = city;
