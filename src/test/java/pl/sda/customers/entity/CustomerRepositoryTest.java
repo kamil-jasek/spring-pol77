@@ -98,6 +98,7 @@ class CustomerRepositoryTest {
 
         customer1.addAddress(new Address("str", "Wawa", "04-333", "PL"));
         customer2.addAddress(new Address("str", "Kraków", "33-220", "PL"));
+        customer2.addAddress(new Address("str", "Wawa", "44-300", "PL"));
         customer3.addAddress(new Address("str", "Wrocław", "55-200", "PL"));
         customer4.addAddress(new Address("str2", "Kraków", "33-220", "PL"));
 
