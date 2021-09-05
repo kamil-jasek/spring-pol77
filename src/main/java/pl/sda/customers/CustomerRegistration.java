@@ -1,16 +1,15 @@
 package pl.sda.customers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CustomerRegistration {
 
 //    @Autowired -- not recommended
-    private final CustomerRepository repository;
+    private final CustomerDatabase repository;
 
 //    @Autowired -- not needed
-    public CustomerRegistration(CustomerRepository repository) {
+    public CustomerRegistration(CustomerDatabase repository) {
         this.repository = repository;
     }
 
