@@ -57,4 +57,19 @@ class CustomerRepositoryTest {
         // then
         assertEquals(List.of(customer1, customer3), result);
     }
+
+    @Test
+    void shouldFindCustomerByEmail() {
+        // given
+        final var customer1 = new Person("ak@op.pl", "Jan", "Nowak", "92929929929");
+        final var customer2 = new Person("qw@WP.pl", "Jan", "Kowalski", "83838288233");
+        final var customer3 = new Person("cx@wp.pl", "Janeczek", "Nowaczkiewicz", "83838288233");
+        repository.saveAllAndFlush(List.of(customer1, customer2, customer3));
+
+        // when
+        final var result = repository.findByEmailIgnoreCaseEndingWith("wp.pl");
+
+        // then
+        assertEquals(List.of(customer2, customer3), result);
+    }
 }
