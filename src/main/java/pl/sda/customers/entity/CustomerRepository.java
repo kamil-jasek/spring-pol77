@@ -15,4 +15,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     @Query("from Person p where upper(p.firstName) like upper(?1) and upper(p.lastName) like upper(?2)")
     List<Person> searchPeople(String firstName, String lastName);
+
+    // napisz query które zwraca wszystkich klientów z danego miasta
+    List<Customer> findCustomersInCity(String city);
 }
