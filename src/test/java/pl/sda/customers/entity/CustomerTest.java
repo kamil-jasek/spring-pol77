@@ -18,4 +18,17 @@ class CustomerTest extends EntityTest {
         final var readCompany = em.find(Company.class, company.getId());
         assertEquals(company, readCompany);
     }
+
+    @Test
+    void shouldSavePerson() {
+        // given
+        final var person = new Person("jk@wp.pl", "Jan", "Kowalski", "020202022222");
+
+        // when
+        persist(person);
+
+        // then
+        final var readPerson = em.find(Person.class, person.getId());
+        assertEquals(person, readPerson);
+    }
 }
