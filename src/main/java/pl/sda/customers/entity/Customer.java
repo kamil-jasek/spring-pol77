@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -29,6 +30,7 @@ public abstract class Customer {
     private String email;
 
     @OneToMany
+    @JoinColumn(name = "customer_id")
     private List<Address> addresses;
 
     protected Customer(@NonNull String email) {
