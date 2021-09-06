@@ -110,4 +110,42 @@ class CustomerRepositoryTest {
         // then
         assertTrue(List.of(customer2, customer4).containsAll(result));
     }
+
+    @Test
+    void shouldFindCompaniesInCountrySortedByName() {
+        // given - utwórz kilka firm wraz z adresami i zapisz poprzez repository
+
+        // when - dodaj metodę w repository, która szuka firm w danym kraju np. PL, a rezultaty są posortowane po nazwie firmy
+        // np.
+        // final var result = repository.findCompaniesInCountry("PL");
+
+        // then - sprawdź czy wyniki się zgadzają z założeniami
+        fail(); // usuń tą linię jak skończysz test
+    }
+
+    @Test
+    void shouldFindAllAddressesForLastName() {
+        // given - utwórz kilka osób wraz z adresami
+
+        // when - dodaj metodę w repository, która zwróci wszsytkie adresy pod którymi mieszkają osoby o nazwisku: "Kowalski"
+        // np.
+        // final var result = repository.findAllAddressesForLastName("Kowalski");
+
+        // then - sprawdź czy wyniki się zgadzają z założeniami
+        fail(); // usuń tą linię jak skończysz test
+    }
+
+    @Test
+    void shouldCountCustomersByCity() {
+        // given - utwórz różnych klientów wraz z adresami
+
+        // when - napisz query, które zwróci miast + liczbę klientów w danym mieście np.
+        // city     |  number_of_customers
+        // Warszawa |  2
+        // Kraków   |  3
+        // final var result = repository.countCustomersByCity();
+
+        // then - sprawdź czy wyniki się zgadzają z założeniami
+        fail(); // usuń tą linię jak skończysz test
+    }
 }
