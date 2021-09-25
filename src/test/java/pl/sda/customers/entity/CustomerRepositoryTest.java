@@ -166,14 +166,28 @@ class CustomerRepositoryTest {
     @Test
     void shouldCountCustomersByCity() {
         // given - utwórz różnych klientów wraz z adresami
+        final var customer1 = new Person("ak@wp.pl", "Jan", "Nowak", "92929929929");
+        final var customer2 = new Person("qw@wp.pl", "Jan", "Kowalski", "83838288233");
+        final var customer3 = new Person("cx@wp.pl", "Janeczek", "Nowaczkiewicz", "83838288233");
+        final var customer4 = new Person("er@on.pl", "Mateusz", "Kowalski", "93939939424");
+
+        customer1.addAddress(new Address("str", "Warszawa", "04-333", "PL"));
+        customer2.addAddress(new Address("str", "Kraków", "33-220", "PL"));
+        customer2.addAddress(new Address("str", "Warszawa", "44-300", "PL"));
+        customer3.addAddress(new Address("str", "Kraków", "55-200", "PL"));
+        customer4.addAddress(new Address("str2", "Kraków", "33-220", "PL"));
+
+        repository.saveAllAndFlush(List.of(customer1, customer2, customer3, customer4));
 
         // when - napisz query, które zwróci miast + liczbę klientów w danym mieście np.
         // city     |  number_of_customers
         // Warszawa |  2
         // Kraków   |  3
-        // final var result = repository.countCustomersByCity();
+         final var result = repository.countCustomersByCity();
 
         // then - sprawdź czy wyniki się zgadzają z założeniami
-        fail(); // usuń tą linię jak skończysz test
+        assertEquals(2, result.size());
+        assertArrayEquals(new Object[] { "Kraków", 3L }, result.get(0));
+        assertArrayEquals(new Object[] { "Warszawa", 2L }, result.get(1));
     }
 }

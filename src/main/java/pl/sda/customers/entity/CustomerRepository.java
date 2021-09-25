@@ -28,4 +28,9 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     @Query("select p.addresses from Person p where upper(p.lastName) = upper(?1)")
     List<Address> findAllAddressesForLastName(String lastName);
+
+    @Query("select a.city, count(c) from Customer c inner join c.addresses a group by a.city order by a.city asc")
+    List<Object[]> countCustomersByCity();
+    // Kraków     |  3
+    // Warszawa   |  2
 }
