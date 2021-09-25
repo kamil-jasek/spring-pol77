@@ -33,4 +33,15 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     List<Object[]> countCustomersByCity();
     // Kraków     |  3
     // Warszawa   |  2
+
+    @Query("select a.countryCode as countryCode, count(c) as count from Customer c "
+        + "inner join c.addresses a "
+        + "group by a.countryCode "
+        + "order by a.countryCode asc")
+    List<CountCustomerByCountryCode> countCustomersByCountryCode();
+
+    interface CountCustomerByCountryCode {
+        String getCountryCode();
+        int getCount();
+    }
 }
