@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
@@ -21,4 +22,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     // where upper(a.city) = upper(?1)
     @Query("from Customer c inner join c.addresses a where upper(a.city) = upper(?1)")
     List<Customer> findCustomersInCity(String city);
+
+    @Query("from Company c inner join c.addresses a where upper(a.countryCode) = upper(:countryCode) order by c.name asc")
+    List<Company> findCompaniesInCountry(@Param("countryCode") String code);
 }

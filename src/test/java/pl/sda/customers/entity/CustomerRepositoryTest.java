@@ -117,13 +117,23 @@ class CustomerRepositoryTest {
     @Test
     void shouldFindCompaniesInCountrySortedByName() {
         // given - utwórz kilka firm wraz z adresami i zapisz poprzez repository
+        final var company1 = new Company("com@wp.pl", "Januszex", "1234567");
+        final var company2 = new Company("squat@wp.pl", "Poltex", "2389232");
+        final var company3 = new Company("port@wp.pl", "TylkoPolska", "3459898");
+        final var company4 = new Company("gryka@wp.pl", "GrykPol", "9871293471");
+
+        company1.addAddress(new Address("str", "Dzierżoniów", "23-234","PL"));
+        company2.addAddress(new Address("str", "Zgorzelec", "32-654","PL"));
+        company3.addAddress(new Address("str", "Dzierżoniów", "19-098","DE"));
+        company4.addAddress(new Address("str", "Dzierżoniów", "91-234","PL"));
+
+        repository.saveAllAndFlush(List.of(company1, company2, company3, company4));
 
         // when - dodaj metodę w repository, która szuka firm w danym kraju np. PL, a rezultaty są posortowane po nazwie firmy
-        // np.
-        // final var result = repository.findCompaniesInCountry("PL");
+         final var result = repository.findCompaniesInCountry("pl");
 
         // then - sprawdź czy wyniki się zgadzają z założeniami
-        fail(); // usuń tą linię jak skończysz test
+        assertEquals(List.of(company4, company1, company2), result);
     }
 
     @Test
