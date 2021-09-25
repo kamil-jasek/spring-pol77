@@ -247,4 +247,24 @@ class CustomerRepositoryTest {
             new CompanyZipCodeView("GrykPol", "9871293471", "23-234"))
             .containsAll(result));
     }
+
+    @Test
+    void shouldFindPersonViewByEmail() {
+        // given
+        final var customer1 = new Person("ak@wp.pl", "Jan", "Nowak", "92929929929");
+        final var customer2 = new Person("qw@wp.com", "Jan", "Kowalski", "83838288233");
+        final var customer3 = new Person("akc@wp.pl", "Janeczek", "Nowaczkiewicz", "83838288233");
+        final var customer4 = new Person("er@on.com", "Mateusz", "Kowalski", "93939939424");
+
+        repository.saveAllAndFlush(List.of(customer1, customer2, customer3, customer4));
+
+        // when
+        final var result = repository.findPersonViewByEmail("%.pl");
+
+        // then
+        assertTrue(List.of(
+            new PersonView(customer1.getId(), customer1.getEmail(), customer1.getPesel()),
+            new PersonView(customer3.getId(), customer3.getEmail(), customer3.getPesel()))
+            .containsAll(result));
+    }
 }
