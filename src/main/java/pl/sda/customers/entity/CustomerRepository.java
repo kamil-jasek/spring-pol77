@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
-    List<Person> findByLastName(String lastName); // --> select * from customers c where c.last_name = ?
+    List<Person> findByLastName(String lastName); // --> select * from customers c where c.customer_type = 'PERSON' and c.last_name = ?
 
     List<Person> findByFirstNameStartingWithIgnoreCaseAndLastNameStartingWithIgnoreCase(String firstName, String lastName);
 
@@ -17,5 +17,5 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     List<Person> searchPeople(String firstName, String lastName);
 
     // napisz query które zwraca wszystkich klientów z danego miasta
-    List<Customer> findCustomersInCity(String city);
+//    List<Customer> findCustomersInCity(String city);
 }

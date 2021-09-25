@@ -3,14 +3,16 @@ package pl.sda.customers.entity;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
 @Table(name = "addresses")
+@NoArgsConstructor(access = AccessLevel.PRIVATE) // for hibernate
 @Getter
 @EqualsAndHashCode
 public final class Address {
@@ -21,9 +23,6 @@ public final class Address {
     private String city;
     private String zipCode;
     private String countryCode;
-
-    // only for hibernate
-    private Address() {}
 
     public Address(@NonNull String street,
         @NonNull String city,

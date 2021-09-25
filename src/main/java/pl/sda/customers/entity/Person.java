@@ -10,7 +10,7 @@ import lombok.NonNull;
 
 @Entity
 @DiscriminatorValue("PERSON")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // for hibernate
 @Getter
 public final class Person extends Customer {
 

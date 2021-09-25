@@ -105,7 +105,7 @@ class CustomerRepositoryTest {
         repository.saveAllAndFlush(List.of(customer1, customer2, customer3, customer4));
 
         // when
-        final var result = repository.findCustomersInCity("Kraków");
+        final List result = null; // repository.findCustomersInCity("Kraków");
 
         // then
         assertTrue(List.of(customer2, customer4).containsAll(result));

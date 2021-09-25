@@ -15,7 +15,7 @@ class AddressTest extends EntityTest {
         persist(address);
 
         // then
-        final var readAddress = em.find(Address.class, address.getId()); // select a.* from addresses
+        final var readAddress = em.find(Address.class, address.getId()); // select a.* from addresses a where a.id = ?1
         assertEquals(address, readAddress);
     }
 }
