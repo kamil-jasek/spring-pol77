@@ -105,7 +105,10 @@ class CustomerRepositoryTest {
         repository.saveAllAndFlush(List.of(customer1, customer2, customer3, customer4));
 
         // when
-        final List result = null; // repository.findCustomersInCity("Kraków");
+        final List<Customer> result = repository.findCustomersInCity("kraków");
+        // select c.* from customers c
+        // inner join addresses a on a.customer_id = c.id
+        // where upper(a.city) = upper(?1)
 
         // then
         assertTrue(List.of(customer2, customer4).containsAll(result));

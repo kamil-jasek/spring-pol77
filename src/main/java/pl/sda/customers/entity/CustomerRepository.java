@@ -16,6 +16,9 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     @Query("from Person p where upper(p.firstName) like upper(?1) and upper(p.lastName) like upper(?2)")
     List<Person> searchPeople(String firstName, String lastName);
 
-    // napisz query które zwraca wszystkich klientów z danego miasta
-//    List<Customer> findCustomersInCity(String city);
+    // select c.* from customers c
+    // inner join addresses a on a.customer_id = c.id
+    // where upper(a.city) = upper(?1)
+    @Query("from Customer c inner join c.addresses a where upper(a.city) = upper(?1)")
+    List<Customer> findCustomersInCity(String city);
 }
