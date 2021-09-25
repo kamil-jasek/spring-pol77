@@ -139,13 +139,28 @@ class CustomerRepositoryTest {
     @Test
     void shouldFindAllAddressesForLastName() {
         // given - utwórz kilka osób wraz z adresami
+        final var customer1 = new Person("ak@wp.pl", "Jan", "Nowak", "92929929929");
+        final var customer2 = new Person("qw@wp.pl", "Jan", "Kowalski", "83838288233");
+        final var customer3 = new Person("cx@wp.pl", "Janeczek", "Nowaczkiewicz", "83838288233");
+        final var customer4 = new Person("er@on.pl", "Mateusz", "Kowalski", "93939939424");
+
+        final var address1 = new Address("str", "Kraków", "33-220", "PL");
+        final var address2 = new Address("str", "Wawa", "44-300", "PL");
+
+        customer1.addAddress(new Address("str", "Wawa", "04-333", "PL"));
+        customer2.addAddress(address1);
+        customer2.addAddress(address2);
+        customer3.addAddress(new Address("str", "Wrocław", "55-200", "PL"));
+        final var address3 = new Address("str2", "Kraków", "33-220", "PL");
+        customer4.addAddress(address3);
+
+        repository.saveAllAndFlush(List.of(customer1, customer2, customer3, customer4));
 
         // when - dodaj metodę w repository, która zwróci wszsytkie adresy pod którymi mieszkają osoby o nazwisku: "Kowalski"
-        // np.
-        // final var result = repository.findAllAddressesForLastName("Kowalski");
+         final var result = repository.findAllAddressesForLastName("Kowalski");
 
         // then - sprawdź czy wyniki się zgadzają z założeniami
-        fail(); // usuń tą linię jak skończysz test
+        assertTrue(List.of(address1, address2, address3).containsAll(result));
     }
 
     @Test

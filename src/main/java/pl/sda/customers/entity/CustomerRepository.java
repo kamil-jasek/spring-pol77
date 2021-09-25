@@ -25,4 +25,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     @Query("from Company c inner join c.addresses a where upper(a.countryCode) = upper(:countryCode) order by c.name asc")
     List<Company> findCompaniesInCountry(@Param("countryCode") String code);
+
+    @Query("select p.addresses from Person p where upper(p.lastName) = upper(?1)")
+    List<Address> findAllAddressesForLastName(String lastName);
 }
