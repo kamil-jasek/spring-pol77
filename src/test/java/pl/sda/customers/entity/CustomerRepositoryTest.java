@@ -1,6 +1,8 @@
 package pl.sda.customers.entity;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import javax.transaction.Transactional;
@@ -218,5 +220,31 @@ class CustomerRepositoryTest {
         final var row2 = result.get(1);
         assertEquals("PL", row2.getCountryCode());
         assertEquals(3, row2.getCount());
+    }
+
+    @Test
+    void shouldFindCompaniesWithZipCode() {
+        // given
+        final var company1 = new Company("com@wp.pl", "Januszex", "1234567");
+        final var company2 = new Company("squat@wp.pl", "Poltex", "2389232");
+        final var company3 = new Company("port@wp.pl", "TylkoPolska", "3459898");
+        final var company4 = new Company("gryka@wp.pl", "GrykPol", "9871293471");
+
+        company1.addAddress(new Address("str", "Dzierżoniów", "23-999","PL"));
+        company2.addAddress(new Address("str", "Zgorzelec", "32-654","PL"));
+        company3.addAddress(new Address("str", "Dzierżoniów", "23-098","DE"));
+        company4.addAddress(new Address("str", "Dzierżoniów", "23-234","PL"));
+
+        repository.saveAllAndFlush(List.of(company1, company2, company3, company4));
+
+        // when
+        final var result = repository.findCompaniesWithZipCode("23%");
+
+        // then
+        assertTrue(List.of(
+            new CompanyZipCodeView("Januszex", "1234567", "23-999"),
+            new CompanyZipCodeView("TylkoPolska", "3459898", "23-098"),
+            new CompanyZipCodeView("GrykPol", "9871293471", "23-234"))
+            .containsAll(result));
     }
 }

@@ -44,4 +44,8 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
         String getCountryCode();
         int getCount();
     }
+
+    @Query("select new pl.sda.customers.entity.CompanyZipCodeView(c.name, c.vat, a.zipCode) "
+        + "from Company c inner join c.addresses a where a.zipCode like ?1")
+    List<CompanyZipCodeView> findCompaniesWithZipCode(String zipCode);
 }
