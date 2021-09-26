@@ -1,6 +1,4 @@
-package pl.sda.customers;
-
-import static org.junit.jupiter.api.Assertions.*;
+package pl.sda.customers.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
