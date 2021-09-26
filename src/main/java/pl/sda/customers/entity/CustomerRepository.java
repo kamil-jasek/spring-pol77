@@ -3,6 +3,7 @@ package pl.sda.customers.entity;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -31,8 +32,8 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     @Query("select a.city, count(c) from Customer c inner join c.addresses a group by a.city order by a.city asc")
     List<Object[]> countCustomersByCity();
-    // Kraków     |  3
-    // Warszawa   |  2
+    // Kraków     |  3   =  row[0]  --->  Object[0]  = Kraków, Object[1] = 3L
+    // Warszawa   |  2   =  row[1]  --->  Object[0]  = Warszawa, Object[1] = 2L
 
     @Query("select a.countryCode as countryCode, count(c) as count from Customer c "
         + "inner join c.addresses a "
@@ -40,15 +41,22 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
         + "order by a.countryCode asc")
     List<CountCustomerByCountryCode> countCustomersByCountryCode();
 
-    interface CountCustomerByCountryCode {
+    interface CountCustomerByCountryCode {  // Rozwiązanie ze SPRING DATA
+
         String getCountryCode();
+
         int getCount();
     }
-
     @Query("select new pl.sda.customers.entity.CompanyZipCodeView(c.name, c.vat, a.zipCode) "
         + "from Company c inner join c.addresses a where a.zipCode like ?1")
     List<CompanyZipCodeView> findCompaniesWithZipCode(String zipCode);
-
     @Query("from PersonView v where upper(v.email) like upper(?1)")
     List<PersonView> findPersonViewByEmail(String email);
+
+    @Modifying
+    @Query("update Address set countryCode = :countryCode where city = :city")
+    int updateCountryCodeForCity(String city, String countryCode);
+
+    @Query("select count(a) from Address a where a.city = :city and a.countryCode = :countryCode")
+    int countCityWithCountryCode(String city, String countryCode);
 }
