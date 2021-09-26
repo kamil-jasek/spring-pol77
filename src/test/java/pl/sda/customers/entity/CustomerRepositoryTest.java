@@ -303,10 +303,23 @@ class CustomerRepositoryTest {
     @Test
     void shouldDeleteAllAddressesWithZipCode() {
         // given - przygotowanie danych testowych
+        final var company1 = new Company("com@wp.pl", "Januszex", "1234567");
+        final var company2 = new Company("squat@wp.pl", "Poltex", "2389232");
+        final var company3 = new Company("port@wp.pl", "TylkoPolska", "3459898");
+        final var company4 = new Company("gryka@wp.pl", "GrykPol", "9871293471");
 
-        // when - usuwanie adresów o danym zipCode
+        company1.addAddress(new Address("str", "Dzierżoniów", "23-999","PL"));
+        company2.addAddress(new Address("str", "Zgorzelec", "32-654","PL"));
+        company3.addAddress(new Address("str", "Dzierżoniów", "23-098","DE"));
+        company4.addAddress(new Address("str", "Dzierżoniów", "23-999","DE"));
 
-        // weryfikacja wyników
-        fail(); // usuń po napisaniu testu
+        repository.saveAllAndFlush(List.of(company1, company2, company3, company4));
+
+        // when
+        final int result = repository.deleteAddressesWithZipCode("23-999");
+
+        // then
+        assertEquals(2, result);
+        assertEquals(0, repository.countAddressesWithZipCode("23-999"));
     }
 }
