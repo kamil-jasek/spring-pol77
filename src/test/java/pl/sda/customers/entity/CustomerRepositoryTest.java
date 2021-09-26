@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ class CustomerRepositoryTest {
 
     @Autowired
     private CustomerRepository repository;
+
+    @Autowired
+    private EntityManager em;
 
     @Test
     void shouldSave() {
@@ -285,9 +289,13 @@ class CustomerRepositoryTest {
 
         // when
         final int result = repository.updateCountryCodeForCity("Dzierżoniów", "PL");
+        em.clear(); // clear cache
 
         // then
         assertEquals(3, result);
         assertEquals(0, repository.countCityWithCountryCode("Dzierżoniów", "DE"));
+        final var addresses = repository.findByCity("Dzierżoniów");
+        assertEquals(3, addresses.size());
+        addresses.forEach(address -> assertEquals("PL", address.getCountryCode()));
     }
 }

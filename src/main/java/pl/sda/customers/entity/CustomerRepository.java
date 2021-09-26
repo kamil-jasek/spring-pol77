@@ -46,17 +46,20 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
         String getCountryCode();
 
         int getCount();
+
     }
     @Query("select new pl.sda.customers.entity.CompanyZipCodeView(c.name, c.vat, a.zipCode) "
         + "from Company c inner join c.addresses a where a.zipCode like ?1")
     List<CompanyZipCodeView> findCompaniesWithZipCode(String zipCode);
     @Query("from PersonView v where upper(v.email) like upper(?1)")
     List<PersonView> findPersonViewByEmail(String email);
-
     @Modifying
     @Query("update Address set countryCode = :countryCode where city = :city")
     int updateCountryCodeForCity(String city, String countryCode);
 
     @Query("select count(a) from Address a where a.city = :city and a.countryCode = :countryCode")
     int countCityWithCountryCode(String city, String countryCode);
+
+    @Query("from Address a where a.city = :city")
+    List<Address> findByCity(String city);
 }
