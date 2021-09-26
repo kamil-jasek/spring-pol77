@@ -3,6 +3,7 @@ package pl.sda.customers.entity;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -297,5 +298,15 @@ class CustomerRepositoryTest {
         final var addresses = repository.findByCity("Dzierżoniów");
         assertEquals(3, addresses.size());
         addresses.forEach(address -> assertEquals("PL", address.getCountryCode()));
+    }
+
+    @Test
+    void shouldDeleteAllAddressesWithZipCode() {
+        // given - przygotowanie danych testowych
+
+        // when - usuwanie adresów o danym zipCode
+
+        // weryfikacja wyników
+        fail(); // usuń po napisaniu testu
     }
 }

@@ -53,6 +53,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     List<CompanyZipCodeView> findCompaniesWithZipCode(String zipCode);
     @Query("from PersonView v where upper(v.email) like upper(?1)")
     List<PersonView> findPersonViewByEmail(String email);
+
     @Modifying
     @Query("update Address set countryCode = :countryCode where city = :city")
     int updateCountryCodeForCity(String city, String countryCode);
