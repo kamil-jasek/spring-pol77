@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.sda.customers.entity.Company;
 import pl.sda.customers.entity.CustomerRepository;
+import pl.sda.customers.entity.Person;
 import pl.sda.customers.service.dto.RegisterCompanyForm;
+import pl.sda.customers.service.dto.RegisterPersonForm;
 import pl.sda.customers.service.exception.EmailAlreadyExistsException;
+import pl.sda.customers.service.exception.PeselAlreadyExistsException;
 import pl.sda.customers.service.exception.VatAlreadyExistsException;
 
 @SpringBootTest
@@ -53,5 +56,38 @@ class CustomerServiceTest {
 
         // when & then
         assertThrows(VatAlreadyExistsException.class, () -> service.registerCompany(form));
+    }
+
+    @Test
+    void shouldRegisterPerson() {
+        // given
+        final var form = new RegisterPersonForm("abc@wp.pl", "Jan", "Kowalski", "98293020202");
+
+        // when
+        final var customerId = service.registerPerson(form);
+
+        // then
+        assertNotNull(customerId);
+        assertTrue(repository.existsById(customerId.getId()));
+    }
+
+    @Test
+    void shouldNotRegisterPersonIfEmailExists() {
+        // given
+        repository.saveAndFlush(new Person("abc@wp.pl", "Jan", "Kowalski", "9383929092"));
+        final var form = new RegisterPersonForm("abc@wp.pl", "Adam", "Nowak", "82992020303");
+
+        // when & then
+        assertThrows(EmailAlreadyExistsException.class, () -> service.registerPerson(form));
+    }
+
+    @Test
+    void shouldNotRegisterPersonIfPeselExists() {
+        // given
+        repository.saveAndFlush(new Person("abc@wp.pl", "Jan", "Kowalski", "9383929092"));
+        final var form = new RegisterPersonForm("asd@wp.pl", "Adam", "Nowak", "9383929092");
+
+        // when & then
+        assertThrows(PeselAlreadyExistsException.class, () -> service.registerPerson(form));
     }
 }

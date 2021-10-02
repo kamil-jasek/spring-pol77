@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import pl.sda.customers.service.dto.RegisterCompanyForm;
 
 @Entity
 @DiscriminatorValue("COMPANY")
@@ -21,6 +22,10 @@ public class Company extends Customer {
         super(email);
         this.name = name;
         this.vat = vat;
+    }
+
+    public static Company createWith(RegisterCompanyForm form) {
+        return new Company(form.getEmail(), form.getName(), form.getVat());
     }
 
     @Override

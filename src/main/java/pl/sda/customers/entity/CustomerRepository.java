@@ -36,6 +36,9 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     @Query("select (count(c) > 0) from Company c where c.vat = ?1")
     boolean vatExists(String vat);
 
+    @Query("select (count(p) > 0) from Person p where p.pesel = ?1")
+    boolean peselExists(String pesel);
+
     @Query("select a.city, count(c) from Customer c inner join c.addresses a group by a.city order by a.city asc")
     List<Object[]> countCustomersByCity();
     // Kraków     |  3   =  row[0]  --->  Object[0]  = Kraków, Object[1] = 3L

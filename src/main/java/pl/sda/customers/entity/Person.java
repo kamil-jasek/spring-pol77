@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import pl.sda.customers.service.dto.RegisterPersonForm;
 
 @Entity
 @DiscriminatorValue("PERSON")
@@ -23,6 +24,13 @@ public final class Person extends Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
+    }
+
+    public static Person createWith(RegisterPersonForm form) {
+        return new Person(form.getEmail(),
+            form.getFirstName(),
+            form.getLastName(),
+            form.getPesel());
     }
 
     @Override
