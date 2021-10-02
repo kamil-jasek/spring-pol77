@@ -17,7 +17,7 @@ import pl.sda.customers.service.exception.VatAlreadyExistsException;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CustomerService {
+public class CustomerRegistrationService {
 
     @NonNull
     private final CustomerRepository repository;

@@ -17,10 +17,10 @@ import pl.sda.customers.service.exception.VatAlreadyExistsException;
 
 @SpringBootTest
 @Transactional
-class CustomerServiceTest {
+class CustomerRegistrationServiceTest {
 
     @Autowired
-    private CustomerService service;
+    private CustomerRegistrationService service;
 
     @Autowired
     private CustomerRepository repository;
