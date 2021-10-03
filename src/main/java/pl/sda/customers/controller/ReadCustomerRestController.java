@@ -21,4 +21,7 @@ final class ReadCustomerRestController {
     List<CustomerView> getCustomers() {
         return query.listCustomers();
     }
+
+    // TODO - Get single customer details
+    // /api/customers/{id}
 }

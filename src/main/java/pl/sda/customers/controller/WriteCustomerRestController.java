@@ -26,4 +26,7 @@ final class WriteCustomerRestController {
             .status(HttpStatus.CREATED)
             .body(service.registerCompany(form));
     }
+
+    // TODO - add method for registering person
+    // POST -> /api/people
 }
