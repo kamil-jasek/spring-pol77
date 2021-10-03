@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -34,6 +37,10 @@ public abstract class Customer {
     @JoinColumn(name = "customer_id")
     private List<Address> addresses;
 
+    @Column(name = "customer_type", insertable = false, updatable = false)
+    @Enumerated(EnumType.STRING)
+    private CustomerType customerType;
+
     protected Customer(@NonNull String email) {
         this.id = UUID.randomUUID();
         this.email = email;
@@ -45,6 +52,8 @@ public abstract class Customer {
             addresses.add(address);
         }
     }
+
+    public abstract String getName();
 
     @Override
     public boolean equals(Object o) {
