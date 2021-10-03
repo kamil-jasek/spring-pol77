@@ -6,6 +6,10 @@ interface ReverseGeocoding {
 
     class ReverseGeocodingException extends RuntimeException {
 
+        public ReverseGeocodingException(String message) {
+            super(message);
+        }
+
         public ReverseGeocodingException(String message, Throwable cause) {
             super(message, cause);
         }
