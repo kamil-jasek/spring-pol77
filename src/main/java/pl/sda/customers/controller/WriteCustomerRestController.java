@@ -29,4 +29,8 @@ final class WriteCustomerRestController {
 
     // TODO - add method for registering person
     // POST -> /api/people
+
+    // TODO - add address to customer
+    // POST -> /api/customer/{id}/addresses
+    // latitude + longitude
 }
