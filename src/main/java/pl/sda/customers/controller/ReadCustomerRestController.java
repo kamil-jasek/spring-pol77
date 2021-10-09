@@ -25,7 +25,6 @@ final class ReadCustomerRestController {
         return query.listCustomers();
     }
 
-    // TODO - Get single customer details
     // /api/customers/{id} -> JSON { type: "PERSON", "firstName": "Jan", ..., "email": "aca@wp.pl", addresses: []}
     //                        JSON { types: "COMPANY", "name": "ASSA", "vat": "PL33...", ... , "email": "...", addresses: [] }
     @GetMapping("/{customerId}")

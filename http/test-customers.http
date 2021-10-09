@@ -27,13 +27,16 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/api/customers/0c810033-4926-4563-8425-aed65c284875/addresses
+POST http://localhost:8080/api/customers/0747a7e0-422e-4a62-8829-d08372bf2cfa/addresses
 Content-Type: application/json
 
 {
   "latitude": 52.242799,
-  "longitude": 20.979061
+  "longitude": 21.971021
 }
+
+###
+GET http://localhost:8080/api/customers/0747a7e0-422e-4a62-8829-d08372bf2cfa
 
 <> 2021-10-09T095255.500.json
 <> 2021-10-09T095125.201.json
