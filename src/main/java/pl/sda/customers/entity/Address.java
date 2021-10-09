@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import pl.sda.customers.service.dto.AddressView;
 
 @Entity
 @Table(name = "addresses")
@@ -33,5 +34,9 @@ public final class Address {
         this.city = city;
         this.zipCode = zipCode;
         this.countryCode = countryCode;
+    }
+
+    public AddressView toView() {
+        return new AddressView(id, street, city, zipCode, countryCode);
     }
 }

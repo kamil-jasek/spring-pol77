@@ -1,12 +1,18 @@
 package pl.sda.customers.entity;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import pl.sda.customers.service.dto.AddressView;
+import pl.sda.customers.service.dto.CustomerDetails;
+import pl.sda.customers.service.dto.CustomerDetails.CompanyCustomerDetails;
 import pl.sda.customers.service.dto.RegisterCompanyForm;
 
 @Entity
@@ -26,6 +32,13 @@ public class Company extends Customer {
 
     public static Company createWith(RegisterCompanyForm form) {
         return new Company(form.getEmail(), form.getName(), form.getVat());
+    }
+
+    @Override
+    public CustomerDetails mapToDetails() {
+        return new CompanyCustomerDetails(getEmail(), name, vat, getAddresses().stream()
+            .map(Address::toView)
+            .collect(toList()));
     }
 
     @Override
