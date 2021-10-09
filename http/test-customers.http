@@ -25,6 +25,16 @@ Content-Type: application/json
   "pesel": "939202040595",
   "email": "mxzmxzxzm@wp.pl"
 }
+
+###
+POST http://localhost:8080/api/customers/0c810033-4926-4563-8425-aed65c284875/addresses
+Content-Type: application/json
+
+{
+  "latitude": 52.242799,
+  "longitude": 20.979061
+}
+
 <> 2021-10-09T095255.500.json
 <> 2021-10-09T095125.201.json
 <> 2021-10-03T145610.500.json

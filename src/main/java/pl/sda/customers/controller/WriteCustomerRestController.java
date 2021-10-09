@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,7 @@ final class WriteCustomerRestController {
 
     @PostMapping("/customers/{customerId}/addresses") // POST -> /api/customers/{id}/addresses
     // JSON -> { "latitude": 92993, "longitude": 93993 }
-    ResponseEntity<CreatedAddress> addAddress(@RequestParam UUID customerId, @RequestBody LatLong latLong) {
+    ResponseEntity<CreatedAddress> addAddress(@PathVariable UUID customerId, @RequestBody LatLong latLong) {
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(addressService.addAddress(new AddAddressForm(customerId,
                 latLong.getLatitude(),
