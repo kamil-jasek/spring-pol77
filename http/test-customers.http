@@ -11,8 +11,8 @@ Content-Type: application/json
 
 {
   "name": "test abc",
-  "vat": "PL939202040595",
-  "email": "isaisaooso@wp.pl"
+  "vat": "PL939299940595",
+  "email": "isoso@wp.pl"
 }
 
 ###
@@ -22,12 +22,12 @@ Content-Type: application/json
 {
   "firstName": "Jan",
   "lastName": "Kowalski",
-  "pesel": "939202040595",
-  "email": "mxzmxzxzm@wp.pl"
+  "pesel": "939202033595",
+  "email": "cccc@wp.pl"
 }
 
 ###
-POST http://localhost:8080/api/customers/0747a7e0-422e-4a62-8829-d08372bf2cfa/addresses
+POST http://localhost:8080/api/customers/42b3b132-b28b-419d-b0f6-e3571adf7e29/addresses
 Content-Type: application/json
 
 {
@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/api/customers/0747a7e0-422e-4a62-8829-d08372bf2cfa
+GET http://localhost:8080/api/customers/0747a7e0-422e-4a62-8829-d08372bf2cfb
 
 <> 2021-10-09T095255.500.json
 <> 2021-10-09T095125.201.json
