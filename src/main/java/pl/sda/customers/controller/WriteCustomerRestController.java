@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sda.customers.service.CustomerRegistrationService;
 import pl.sda.customers.service.dto.RegisterCompanyForm;
+import pl.sda.customers.service.dto.RegisterPersonForm;
 import pl.sda.customers.service.dto.RegisteredCustomerId;
 
 @RestController
@@ -28,8 +29,13 @@ final class WriteCustomerRestController {
             .body(service.registerCompany(form));
     }
 
-    // TODO - add method for registering person
-    // POST -> /api/people
+    @PostMapping("/people") // POST -> /api/people
+    // JSON -> { "firstName": "Jan", ..... } -> DTO (RegisterPersonForm)
+    ResponseEntity<RegisteredCustomerId> registerPerson(@RequestBody RegisterPersonForm form) {
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(service.registerPerson(form));
+    }
 
     // TODO - add address to customer
     // POST -> /api/customer/{id}/addresses

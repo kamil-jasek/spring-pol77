@@ -12,9 +12,19 @@ Content-Type: application/json
 {
   "name": "test abc",
   "vat": "PL939202040595",
-  "email": "mxzmxzxzm@wp.pl"
+  "email": "isaisaooso@wp.pl"
 }
 
+###
+POST http://localhost:8080/api/people
+Content-Type: application/json
+
+{
+  "firstName": "Jan",
+  "lastName": "Kowalski",
+  "pesel": "939202040595",
+  "email": "mxzmxzxzm@wp.pl"
+}
 <> 2021-10-09T095255.500.json
 <> 2021-10-09T095125.201.json
 <> 2021-10-03T145610.500.json
