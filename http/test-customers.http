@@ -1,0 +1,28 @@
+GET http://localhost:8080/api/customers
+
+
+<> 2021-10-09T095225.200.json
+<> 2021-10-09T094700.200.json
+<> 2021-10-03T145200.200.json
+
+###
+POST http://localhost:8080/api/companies
+Content-Type: application/json
+
+{
+  "name": "test abc",
+  "vat": "PL939202040595",
+  "email": "mxzmxzxzm@wp.pl"
+}
+
+<> 2021-10-09T095255.500.json
+<> 2021-10-09T095125.201.json
+<> 2021-10-03T145610.500.json
+<> 2021-10-03T145432.500.json
+<> 2021-10-03T145116.201.json
+<> 2021-10-03T144817.400.json
+<> 2021-10-03T142657.200.json
+<> 2021-10-03T135124.200.json
+<> 2021-10-03T133733.200.json
+<> 2021-10-03T133559.200.json
+<> 2021-10-03T125317.200.txt

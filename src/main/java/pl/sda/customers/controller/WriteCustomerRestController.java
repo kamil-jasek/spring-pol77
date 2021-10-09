@@ -21,6 +21,7 @@ final class WriteCustomerRestController {
     private final CustomerRegistrationService service;
 
     @PostMapping("/companies") // POST -> /api/companies
+    // JSON -> { "name": "Comp S.A.", ..... } -> DTO (RegisterCompanyForm)
     ResponseEntity<RegisteredCustomerId> registerCompany(@RequestBody RegisterCompanyForm form) {
         return ResponseEntity
             .status(HttpStatus.CREATED)

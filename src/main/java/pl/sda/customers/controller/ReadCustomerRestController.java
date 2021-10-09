@@ -17,7 +17,7 @@ final class ReadCustomerRestController {
     @NonNull
     private final CustomerQuery query;
 
-    @GetMapping
+    @GetMapping // GET -> /api/customers
     List<CustomerView> getCustomers() {
         return query.listCustomers();
     }
